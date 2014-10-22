@@ -1,0 +1,8 @@
+{
+    "String field": "pi",
+    "Number field": 3.14,
+    "Boolean field": true,
+    "null field": null,
+    "an object field": {},
+    "an array field": []
+}

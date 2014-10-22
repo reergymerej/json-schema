@@ -1,0 +1,14 @@
+{
+    "meta": {
+        "name": "Some",
+        "version": "1.0",
+        "description": "JSON schema for Some data structures omitting optional property info"
+    },
+
+    "String field": {},
+    "Number field": {},
+    "Boolean field": {},
+    "null field": {},
+    "an object field": {},
+    "an array field": {}
+}
