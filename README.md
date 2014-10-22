@@ -22,7 +22,28 @@ Use a simple notation system for defining schemas.
 * property value types should be enumerated and cover all acceptable JSON types
 * schemas should allow for nested objects
 
-### Property Types
+### Schema-Level
+
+*Required Properties*
+
+* (string) name - The name of the schema.
+* (string) version - The version of the schema.
+* (array) fields - Array of field object definitions.
+
+### Field Object Definitions
+
+*Required Properties*
+
+* name - The name of the field.
+
+*Optional Properties*
+
+* (string) type - JSON value type expected for the the property's value
+* (string) description - Description of what this field and it's value are for
+* (array) fields - Used when defining nested objects' properties
+
+
+### Value Types
 
 JSON supports the following types:
 
@@ -33,6 +54,15 @@ JSON supports the following types:
 * null
 * an object
 * an array
+
+These are used in the schema's notation as:
+
+* "string"
+* "number"
+* "boolean"
+* "null"
+* "object"
+* "array"
 
 ### Consumption
 
