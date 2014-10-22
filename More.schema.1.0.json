@@ -1,0 +1,31 @@
+{
+  "name": "More",
+  "version": "1.0",
+  "description": "JSON schema for More data structures",
+  "fields": [
+    {
+      "name": "foo",
+      "description": "a \"deep\" object",
+      "type": "object",
+      "fields": [
+        {
+          "name": "bar",
+          "description": "an object with a couple fields",
+          "type": "object",
+          "fields": [
+            {
+              "name": "baz",
+              "description": "some boolean value",
+              "type": "boolean"
+            },
+            {
+              "name": "quux",
+              "description": "an array",
+              "type": "array"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

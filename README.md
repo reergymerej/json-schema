@@ -13,12 +13,12 @@ Use a simple notation system for defining schemas.
 * schemas should be JSON
 * schemas should document meta-data
 * meta-data should include schema name
-* meta-data should include schema version (String)
+* meta-data should include schema version (*string*)
 * meta-data should be extendable
 * schemas should document property names
 * schemas should optionally document property descriptions
 * schemas should optionally document property value types
-* property value types should be indicated by a string
+* property value types should be indicated by a *string*
 * property value types should be enumerated and cover all acceptable JSON types
 * schemas should allow for nested objects
 
@@ -26,22 +26,35 @@ Use a simple notation system for defining schemas.
 
 *Required Properties*
 
-* (string) name - The name of the schema.
-* (string) version - The version of the schema.
-* (array) fields - Array of field object definitions.
-
-### Field Object Definitions
-
-*Required Properties*
-
-* name - The name of the field.
+* {*string*} name - the name of the schema
+* {*string*} version - the version of the schema
+* {*string*} description - a description of the schema
+* {*array*} fields - <a href="#field-definitions">field definitions</a>
 
 *Optional Properties*
 
-* (string) type - JSON value type expected for the the property's value
-* (string) description - Description of what this field and it's value are for
-* (array) fields - Used when defining nested objects' properties
+* Additional name/value properties may be added as needed, but their interpretation may be subjective to the system consuming the schema.
 
+<a name="field-definitions"></a>
+### Field Definitions
+
+Field definitions can be expressed in two formats: *string*s or *object*s.  Use strings for basic notation and objects for more elaborate field notation.
+
+**Strings**
+
+When defining a field as a *string*, simply use the field's name.
+
+**Objects**
+
+*Required Properties*
+
+* {*string*} name - The name of the field.
+
+*Optional Properties*
+
+* {*string*} type - JSON value type expected for the the property's value
+* {*string*} description - description of what this field and it's value are for
+* {*array*} fields - used when defining nested objects' properties, <a href="#field-definitions">field definitions</a> - only valid for "object" value types
 
 ### Value Types
 
