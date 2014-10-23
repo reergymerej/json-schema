@@ -9,7 +9,25 @@ var reader = require('./schema-reader/reader.js');
 
 var exampleDir = path.join(process.cwd(), 'examples');
 
-// ./examples/Some.json
+/**
+* Load a schema from disk (sync).
+* @param {String} schema file name
+* @return {Object} parsed JSON from schema
+*/
+var loadSchema = function (schema) {
+    var filePath = path.join(exampleDir, schema);
+    return JSON.parse(fs.readFileSync(filePath, {
+        encoding: 'utf8'
+    }));
+};
 
+// ./examples/Some.json
+// ================================================
+
+// Some.schema.1.0.json
+// reader.summarize(loadSchema('Some.schema.1.0.json'));
+// reader.summarize(loadSchema('Some.schema.1.1.json'));
+// reader.summarize(loadSchema('Some.schema.2.0.json'));
 
 // ./examples/More.json
+reader.summarize(loadSchema('More.schema.1.0.json'));
