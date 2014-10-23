@@ -17,45 +17,39 @@ Schemas are JSON with a standardized structure.
 * **name** {*string*}  
     the name of the schema
 
-* **version** {*string*}  
+* **version** {*string*/*number*}  
     the version of the schema
 
 * **description** {*string*}  
     a description of the schema
 
-* **fields** {*<a href="#field-definitions">field definition[]</a>*}  
+* **fields** {*<a href="#field-definition">field definition[]</a>*}  
     an *array* of definitions for each of the name/value pairs expected in the JSON structure the schema describes
 
 *Optional Properties*
 
 * Additional name/value pairs may be added as needed, but their interpretation is up to the system consuming the schema.
 
-<a name="field-definitions"></a>
-### Field Definitions
-
-Field definitions can be expressed in two formats: *strings* or *objects*.  Use *strings* for basic notation and *objects* for more elaborate field notation.
-
-**Strings**
-
-When defining a field as a *string*, simply use the field's name.
-
-**Objects**
+<a name="field-definition"></a>
+### Field Definition
 
 *Required Properties*
 
 * **name** {*string*}  
-    the name of the field
+    the name of the field - When used to describe possible values in an array, name should be omitted.
 
 *Optional Properties*
 
 * **type** {*string*}  
-    JSON value type expected for the the property's value
+    JSON value type expected for the the property's value, indicate multiple types by separating values with a space
 
 * **description** {*string*}  
-    description of what this field and it's value are for
+    description of what this field and its value are for
 
-* **fields** {*<a href="#field-definitions">field definition[]</a>*}  
-    only valid for "object" <a href="#value-types">value types</a>, an *array* of definitions for each of the name/value pairs expected in the field's structure
+* **fields** {*<a href="#field-definition">field definition[]</a>*}  
+    only valid for "object" and "array" <a href="#value-types">value types</a> - an *array* of definitions for each of the name/value pairs expected in the field's structure
+
+* Additional name/value pairs may be added as needed, but their interpretation is up to the system consuming the schema.
 
 <a name="value-types"></a>
 ### Value Types
@@ -74,4 +68,4 @@ JSON supports just a few data types.  The following table shows how the JSON dat
 
 ## Usage
 
-JSON Schemas allow for a standardized way to document JSON structures of any shape.  The interpretation of the schemas is up to the system using the schemas.
+JSON Schemas allow for a standardized way to document JSON structures of any shape.  The interpretation of the schemas is up to the system using them, though it would make sense if they adhered to the rules set forth here.  Esoteric extended notation is possible, but isn't expected to be understood by other systems.

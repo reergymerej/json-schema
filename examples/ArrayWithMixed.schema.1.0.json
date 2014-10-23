@@ -1,0 +1,34 @@
+{
+    "name": "ArrayWithMixed",
+    "version": "1.0",
+    "description": "a simple structure with an array that may contain mixed values",
+    "fields": [
+        {
+            "name": "arr",
+            "type": "array",
+            "description": "list of mixed types",
+            "fields": [
+                {
+                    "type": "string",
+                    "description": "some string value"
+                },
+                {
+                    "type": "object",
+                    "description": "When a string just doesn't cut it...",
+                    "fields": [
+                        {
+                            "name": "baz",
+                            "type": "number",
+                            "description": "the baz"
+                        },
+                        {
+                            "name": "quux",
+                            "type": "boolean",
+                            "description": "the quux"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

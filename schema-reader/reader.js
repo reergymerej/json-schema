@@ -14,30 +14,53 @@ JSONSchema.prototype.summarize = function () {
     console.log('"%s", version %s\n%s',
         this.name, this.version, this.description);
 
-    console.log('has %d field(s)', this.fields.length);
-    this.fields.forEach(function (field) {
-        field.summarize(0);
-    });
+    if (this.fields.length) {
+        console.log('field(s):');
+        this.fields.forEach(function (field) {
+            field.summarize(0);
+        });
+    }
 };
 
 var Field = function (config) {
-    if (typeof config === 'string') {
-        this.name = config;
-    } else {
-        this.name = config.name;
-        this.type = config.type;
-        this.description = config.description;
+    this.name = config.name;
+    this.type = config.type;
+    this.types = this.parseTypes(config.type);
+    this.description = config.description;
 
-        if (this.type === 'object' && config.fields) {
+    if (this.types.object || this.types.array) {
+        if (config.fields) {
             this.fields = parseFields(config.fields);
         }
     }
 };
 
 /**
-* @param {Number} depth
+* Returns a hash of the types for this field.
+* @param {String} types
+* @return {Object}
 */
-Field.prototype.summarize = function (depth) {
+Field.prototype.parseTypes = function (types) {
+    var validTypes = ['string', 'number', 'boolean', 'null', 'object', 'array'];
+    var typesHash = {};
+
+    if (types) {
+        types = types.split(' ');
+        types.forEach(function (type) {
+            if (validTypes.indexOf(type) > -1) {
+                typesHash[type] = true;
+            }
+        });
+    }
+
+    return typesHash;
+};
+
+/**
+* @param {Number} depth
+* @param {Boolean} [asArrayFields]
+*/
+Field.prototype.summarize = function (depth, asArrayFields) {
     var indent = function () {
         var str = '';
         while (str.length <= depth) {
@@ -48,16 +71,26 @@ Field.prototype.summarize = function (depth) {
 
     var left = indent();
 
-    console.log('\n');
-    console.log('%s%s%s: %s', left, left, 'name', this.name);
-    console.log('%s%s%s: %s', left, left, 'type', this.type);
-    console.log('%s%s%s: %s', left, left, 'description', this.description);
-    if (this.fields) {
-        console.log('%s%shas %d field(s)', left, left, this.fields.length);
-        this.fields.forEach(function (field) {
-            field.summarize(depth + 2);
-        });
+    // Fields defined within an array don't have names.
+    if (!asArrayFields) {
+        console.log('%s%s%s: %s', left, left, 'name', this.name);
     }
+
+    if (this.type) {
+        console.log('%s%s%s: %s', left, left, 'type(s)', this.type);
+    }
+
+    if (this.description) {
+        console.log('%s%s%s: %s', left, left, 'description', this.description);
+    }
+    
+    if (this.fields) {
+        console.log('%s%sfield(s):', left, left);
+        this.fields.forEach(function (field) {
+            field.summarize(depth + 2, this.types.array);
+        }, this);
+    }
+    console.log('%s%s---------', left, left);
 };
 
 /**

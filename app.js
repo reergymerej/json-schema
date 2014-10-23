@@ -25,9 +25,14 @@ var loadSchema = function (schema) {
 // ================================================
 
 // Some.schema.1.0.json
-// reader.summarize(loadSchema('Some.schema.1.0.json'));
-// reader.summarize(loadSchema('Some.schema.1.1.json'));
-// reader.summarize(loadSchema('Some.schema.2.0.json'));
+reader.summarize(loadSchema('Some.schema.1.1.json'));
+reader.summarize(loadSchema('Some.schema.2.0.json'));
 
 // ./examples/More.json
 reader.summarize(loadSchema('More.schema.1.0.json'));
+
+// ./examples/ArrayWithMixed.json
+reader.summarize(loadSchema('ArrayWithMixed.schema.1.0.json'));
+
+// ./examples/MixedTypes.json
+reader.summarize(loadSchema('MixedTypes.schema.1.0.json'));
