@@ -25,7 +25,7 @@ var loadSchema = function (schema) {
 // ================================================
 
 // Some.schema.1.0.json
-// reader.summarize(loadSchema('Some.schema.1.1.json'));
+reader.summarize(loadSchema('Some.schema.1.0.json'));
 // reader.summarize(loadSchema('Some.schema.1.2.json'));
 // reader.summarize(loadSchema('Some.schema.2.0.json'));
 
@@ -33,7 +33,7 @@ var loadSchema = function (schema) {
 // reader.summarize(loadSchema('More.schema.1.0.json'));
 
 // ./examples/ArrayWithMixed.json
-reader.summarize(loadSchema('ArrayWithMixed.schema.1.0.json'));
+// reader.summarize(loadSchema('ArrayWithMixed.schema.1.0.json'));
 
 // ./examples/MixedTypes.json
 // reader.summarize(loadSchema('MixedTypes.schema.1.0.json'));
@@ -46,27 +46,27 @@ reader.summarize(loadSchema('ArrayWithMixed.schema.1.0.json'));
 * @param {Object} data
 * @return {Object}
 */
-reader.JSONSchema.prototype.getValid = function (data) {
-    var valid = {};
+// reader.JSONSchema.prototype.getValid = function (data) {
+//     var valid = {};
 
-    this.fields.forEach(function (field, index, fields) {
-        // console.log(index, field);
-    });
+//     this.fields.forEach(function (field, index, fields) {
+//         // console.log(index, field);
+//     });
 
-    return valid;
-};
+//     return valid;
+// };
 
-var schema = new reader.JSONSchema(loadSchema('Some.schema.1.2.json'));
+// var schema = new reader.JSONSchema(loadSchema('Some.schema.1.2.json'));
 
-var data = {
-    "String field": "pi",
-    "Number field": 3.14,
-    "Boolean field": true,
-    "null field": null,
-    "an object field": {},
-    "an array field": []
-};
+// var data = {
+//     "String field": "pi",
+//     "Number field": 3.14,
+//     "Boolean field": true,
+//     "null field": null,
+//     "an object field": {},
+//     "an array field": []
+// };
 
-data = schema.getValid(data);
+// data = schema.getValid(data);
 
 // console.log(data);
