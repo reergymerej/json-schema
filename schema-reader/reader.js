@@ -22,16 +22,31 @@ JSONSchema.prototype.summarize = function () {
     }
 };
 
-var Field = function (config) {
-    this.name = config.name;
+/**
+* Remove all values not covered by the schema.
+* @param {Object} data
+* @return {Object}
+*/
+JSONSchema.prototype.getValid = function (data) {
+    var valid = {};
+
+    return valid;
+};
+
+var Field = function (name, config) {
+    this.name = name;
     this.type = config.type;
     this.types = this.parseTypes(config.type);
     this.description = config.description;
 
-    if (this.types.object || this.types.array) {
-        if (config.fields) {
-            this.fields = parseFields(config.fields);
-        }
+    // parse sub-fields
+    if (this.types.object && config.fields) {
+        this.fields = parseFields(config.fields);
+    }
+
+    if (this.types.array && config.values) {
+        console.log('Hey, I have possible values defined.');
+        this.values = this.parseValues(config.values);
     }
 };
 
@@ -54,6 +69,14 @@ Field.prototype.parseTypes = function (types) {
     }
 
     return typesHash;
+};
+
+Field.prototype.parseValues = function (values) {
+    var parsed = [];
+    values.forEach(function (valueDefintion) {
+        parsed.push(new Field(null, valueDefintion));
+    });
+    return parsed;
 };
 
 /**
@@ -90,6 +113,13 @@ Field.prototype.summarize = function (depth, asArrayFields) {
             field.summarize(depth + 2, this.types.array);
         }, this);
     }
+
+    if (this.values) {
+        console.log('%s%svalues(s):', left, left);
+        this.values.forEach(function (field) {
+            field.summarize(depth + 2, this.types.array);
+        }, this);
+    }
     console.log('%s%s---------', left, left);
 };
 
@@ -99,8 +129,8 @@ Field.prototype.summarize = function (depth, asArrayFields) {
 */
 var parseFields = function (fields) {
     var parsed = [];
-    fields.forEach(function (field) {
-        parsed.push(new Field(field));
+    Object.keys(fields).forEach(function (fieldName) {
+        parsed.push(new Field(fieldName, fields[fieldName]));
     });
     return parsed;
 };
@@ -115,3 +145,4 @@ var summarize = function (schema) {
 };
 
 exports.summarize = summarize;
+exports.JSONSchema = JSONSchema;

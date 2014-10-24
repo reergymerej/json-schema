@@ -23,20 +23,15 @@ Schemas are JSON with a standardized structure.
 * **description** {*string*}  
     a description of the schema
 
-* **fields** {*<a href="#field-definition">field definition[]</a>*}  
-    an *array* of definitions for each of the name/value pairs expected in the JSON structure the schema describes
+* **fields** {*object*}  
+    name/value pairs for each of the name/value pairs expected in the JSON structure the schema describes - The names should match those of the names in the JSON.  The values should be <a href="#value-definition">value definition</a>.
 
 *Optional Properties*
 
 * Additional name/value pairs may be added as needed, but their interpretation is up to the system consuming the schema.
 
-<a name="field-definition"></a>
+<a name="value-definition"></a>
 ### Field Definition
-
-*Required Properties*
-
-* **name** {*string*}  
-    the name of the field - When used to describe possible values in an array, name should be omitted.
 
 *Optional Properties*
 
@@ -46,8 +41,11 @@ Schemas are JSON with a standardized structure.
 * **description** {*string*}  
     description of what this field and its value are for
 
-* **fields** {*<a href="#field-definition">field definition[]</a>*}  
-    only valid for "object" and "array" <a href="#value-types">value types</a> - an *array* of definitions for each of the name/value pairs expected in the field's structure
+* **fields** {*object*}  
+    only valid for "object" <a href="#value-types">value types</a> - name/value pairs for the name/value pairs in this object - The names should match the names in the object.  The values should be <a href="#value-definition">value definition</a>.
+
+* **values** {*object[]*}  
+    only valid for "array" <a href="#value-types">value types</a> - An array of <a href="#value-definition">value definition</a> that may appear in the field.
 
 * Additional name/value pairs may be added as needed, but their interpretation is up to the system consuming the schema.
 

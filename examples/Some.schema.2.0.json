@@ -2,37 +2,31 @@
     "name": "Some",
     "version": "2.0",
     "description": "JSON schema for Some data structures including optional property info",
-    "fields": [
-        {
-            "name": "String field",
+    "fields": {
+        "String field": {
             "type": "string",
             "description": "a field used to store String values"
         },
-        {
-            "name": "Number field",
+        "Number field": {
             "type": "number",
             "description": "a field used to store Number values"
         },
-        {
-            "name": "Boolean field",
+        "Boolean field": {
             "type": "boolean",
             "description": "a field used to store Boolean values"
         },
-        {
-            "name": "null field",
+        "null field": {
             "type": "null",
             "description": "a field used to store null values"
         },
-        {
-            "name": "an object field",
+        "an object field": {
             "type": "object",
             "description": "a field used to store an object values",
             "fields": []
         },
-        {
-            "name": "an array field",
+        "an array field": {
             "type": "array",
             "description": "a field used to store an array values"
         }
-    ]
+    }
 }
