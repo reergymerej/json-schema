@@ -20,7 +20,7 @@ Schemas are JSON with a standardized structure.
 *Required Properties*
 
 * **fields** {*object*}  
-    fields for each of the fields pairs in the JSON structure the schema describes - The names should match those of the names in the JSON.  The values should be <a href="#value-definition">value definitions</a>.
+    fields for each of the name/value pairs in the JSON structure - The names should match those of the names in the JSON.  The values should be <a href="#value-definition">value definitions</a>.
 
 *Optional Properties*
 
@@ -38,7 +38,7 @@ Schemas are JSON with a standardized structure.
 <a name="value-definition"></a>
 ### Value Definitions
 
-Value definitions are objects that describe the values of fields (name/value pairs) in the JSON.  Value defnitions may be nested or appear in possible values for arrays.
+Value definitions are objects that describe the values of fields (name/value pairs) in the JSON.  Value defnitions may be nested or appear in the list of possible values for arrays.
 
 *Optional Properties*
 
@@ -49,7 +49,7 @@ Value definitions are objects that describe the values of fields (name/value pai
     description of what this field and its value mean
 
 * **fields** {*object*}  
-    only valid for "object" <a href="#value-types">value types</a> - used to define nested fields - The names should match the names in the object.  The values should be <a href="#value-definition">value definitions</a>.
+    only valid for "object" and "array" <a href="#value-types">value types</a> - use to define nested fields - The names should match the names in the object.  The values should be <a href="#value-definition">value definitions</a>.  This can be used to define nested objects or to enumerate values in an array.
 
 * **values** {*object[]*}  
     only valid for "array" <a href="#value-types">value types</a> - An array of <a href="#value-definitions">value definitions</a> that may appear in the array.
@@ -59,7 +59,7 @@ Value definitions are objects that describe the values of fields (name/value pai
 <a name="value-types"></a>
 ### Value Types
 
-JSON supports just a few data types.  The following table shows how the JSON data types are referenced in JSON Schema notation.
+JSON supports just a few value types.  The following table shows how the JSON data types are referenced in JSON Schema notation.
 
 |[JSON Data Type](http://json.org/)|JSON Schema Notation|
 |---|---|
@@ -77,118 +77,77 @@ JSON Schemas allow for a standardized way to document JSON structures of any sha
 
 ## Examples
 
+a basic example
 ```js
-// JSON Example
+// JSON
 {
-    "String field": "pi",
-    "Number field": 3.14,
-    "Boolean field": true,
-    "null field": null,
-    "an object field": {},
-    "an array field": []
+  "a": "pi",
+  "b": 3.14,
+  "c": true,
+  "d": null,
+  "e": {},
+  "f": []
 }
 
-// A Very Basic JSON Schema
+// schema
 {
   "fields": {
-    "String field": {},
-    "Number field": {},
-    "Boolean field": {},
-    "null field": {},
-    "an object field": {},
-    "an array field": {}
+    "a": {},
+    "b": {},
+    "c": {},
+    "d": {},
+    "e": {},
+    "f": {}
   }
 }
+```
 
-// A Descriptive JSON Schema
+with suggested properties
+```js
+// JSON
 {
-  "name": "Some",
-  "version": "1.1",
-  "description": "contrived object used to demonstrate each value type",
+  "a": "pi"
+}
+
+// schema
+{
+  "name": "IrrationalNumber",
+  "version": "1.0",
+  "description": "This is a hokey JSON structure used to demonstrate JSON Schemas.",
   "fields": {
-    "String field": {
+    "a": {
       "type": "string",
-      "description": "a field with a string value"
-    },
-    "Number field": {
-      "type": "number",
-      "description": "a field with a number value"
-    },
-    "Boolean field": {
-      "type": "boolean",
-      "description": "a field with a boolean value"
-    },
-    "null field": {
-      "type": "null",
-      "description": "a field with a null value"
-    },
-    "an object field": {
-      "type": "object",
-      "description": "a field with an object value"
-    },
-    "an array field": {
-      "type": "array",
-      "description": "a field with an array value"
+      "description": "irrational number's name"
     }
   }
 }
 ```
 
-**Complex Structure Example**
+with custom properties
 ```js
-// JSON Example
+// JSON
 {
-    "foo": {
-        "bar": {
-            "baz": true,
-            "quux": [1, 2, 3]
-        }
-    }
+  "a": "pi"
 }
 
-// JSON Schema (basic)
+// schema
 {
-  "fields": {
-    "foo": {
-      "fields": {
-        "bar": {
-          "fields": {
-            "baz": {},
-            "quux": {}
-          }
-        }
-      }
-    }
-  }
-}
-
-// JSON Schema (elaborate)
-{
-  "name": "More",
+  "name": "IrrationalNumber",
   "version": "1.1",
-  "description": "a complex JSON structure used for demonstration",
+  "description": "This is a hokey JSON structure used to demonstrate JSON Schemas.",
+  "url": "https://github.com/reergymerej/json-schema",
   "fields": {
-    "foo": {
-      "fields": {
-        "bar": {
-          "fields": {
-            "baz": {
-              "type": "boolean",
-              "description": "some random boolean field"
-              },
-            "quux": {
-              "type": "array",
-              "description": "an array used to hold numbers",
-              "values": [
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
-        }
-      }
+    "a": {
+      "type": "string",
+      "description": "irrational number's name",
+      "approximation": "22/7"
     }
   }
 }
-```
+``
+
+nested object
+
+array with multiple possibilities
+
+array with itemized values
