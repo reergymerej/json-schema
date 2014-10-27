@@ -1,0 +1,17 @@
+{
+    "fields": {
+        "a": {
+            "type": "array",
+            "fields": {
+                "0": {
+                    "type": "string",
+                    "description": "foo"
+                },
+                "1": {
+                    "type": "number",
+                    "description": "bar"
+                }
+            }
+        }
+    }
+}

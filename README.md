@@ -77,77 +77,25 @@ JSON Schemas allow for a standardized way to document JSON structures of any sha
 
 ## Examples
 
-a basic example
-```js
-// JSON
-{
-  "a": "pi",
-  "b": 3.14,
-  "c": true,
-  "d": null,
-  "e": {},
-  "f": []
-}
-
-// schema
-{
-  "fields": {
-    "a": {},
-    "b": {},
-    "c": {},
-    "d": {},
-    "e": {},
-    "f": {}
-  }
-}
-```
-
-with suggested properties
-```js
-// JSON
-{
-  "a": "pi"
-}
-
-// schema
-{
-  "name": "IrrationalNumber",
-  "version": "1.0",
-  "description": "This is a hokey JSON structure used to demonstrate JSON Schemas.",
-  "fields": {
-    "a": {
-      "type": "string",
-      "description": "irrational number's name"
-    }
-  }
-}
-```
-
-with custom properties
-```js
-// JSON
-{
-  "a": "pi"
-}
-
-// schema
-{
-  "name": "IrrationalNumber",
-  "version": "1.1",
-  "description": "This is a hokey JSON structure used to demonstrate JSON Schemas.",
-  "url": "https://github.com/reergymerej/json-schema",
-  "fields": {
-    "a": {
-      "type": "string",
-      "description": "irrational number's name",
-      "approximation": "22/7"
-    }
-  }
-}
-``
 
 nested object
 
 array with multiple possibilities
 
 array with itemized values
+=======
+
+=======================================
+field definitions
+used to define a name/value pair
+* string[] - names of fields
+* object - field names paired with field value definitions
+
+field value definitions
+used to describe a field's value
+* string - denotes value type
+* object - extended field value definition info
+
+possible values
+used to describe values that may appear within an array
+* object[] - value definitions

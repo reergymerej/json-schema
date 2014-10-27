@@ -1,0 +1,15 @@
+{
+    "fields": {
+        "a": {
+            "type": "array",
+            "values": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "boolean"
+                }
+            ]
+        }
+    }
+}
