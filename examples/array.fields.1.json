@@ -1,0 +1,12 @@
+{
+    "fields": {
+        "a": {
+            "type": "array",
+            "fields": {
+                "0": "string",
+                "1": "boolean",
+                "2": "number"
+            }
+        }
+    }
+}

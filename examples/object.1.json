@@ -1,0 +1,8 @@
+{
+    "fields": {
+        "a": {
+            "type": "object",
+            "fields": ["a", "b", "c"]
+        }
+    }
+}

@@ -77,118 +77,18 @@ JSON Schemas allow for a standardized way to document JSON structures of any sha
 
 ## Examples
 
-```js
-// JSON Example
-{
-    "String field": "pi",
-    "Number field": 3.14,
-    "Boolean field": true,
-    "null field": null,
-    "an object field": {},
-    "an array field": []
-}
 
-// A Very Basic JSON Schema
-{
-  "fields": {
-    "String field": {},
-    "Number field": {},
-    "Boolean field": {},
-    "null field": {},
-    "an object field": {},
-    "an array field": {}
-  }
-}
+=======================================
+field definitions
+used to define a name/value pair
+* string[] - names of fields
+* object - field names paired with field value definitions
 
-// A Descriptive JSON Schema
-{
-  "name": "Some",
-  "version": "1.1",
-  "description": "contrived object used to demonstrate each value type",
-  "fields": {
-    "String field": {
-      "type": "string",
-      "description": "a field with a string value"
-    },
-    "Number field": {
-      "type": "number",
-      "description": "a field with a number value"
-    },
-    "Boolean field": {
-      "type": "boolean",
-      "description": "a field with a boolean value"
-    },
-    "null field": {
-      "type": "null",
-      "description": "a field with a null value"
-    },
-    "an object field": {
-      "type": "object",
-      "description": "a field with an object value"
-    },
-    "an array field": {
-      "type": "array",
-      "description": "a field with an array value"
-    }
-  }
-}
-```
+field value definitions
+used to describe a field's value
+* string - denotes value type
+* object - extended field value definition info
 
-**Complex Structure Example**
-```js
-// JSON Example
-{
-    "foo": {
-        "bar": {
-            "baz": true,
-            "quux": [1, 2, 3]
-        }
-    }
-}
-
-// JSON Schema (basic)
-{
-  "fields": {
-    "foo": {
-      "fields": {
-        "bar": {
-          "fields": {
-            "baz": {},
-            "quux": {}
-          }
-        }
-      }
-    }
-  }
-}
-
-// JSON Schema (elaborate)
-{
-  "name": "More",
-  "version": "1.1",
-  "description": "a complex JSON structure used for demonstration",
-  "fields": {
-    "foo": {
-      "fields": {
-        "bar": {
-          "fields": {
-            "baz": {
-              "type": "boolean",
-              "description": "some random boolean field"
-              },
-            "quux": {
-              "type": "array",
-              "description": "an array used to hold numbers",
-              "values": [
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
+possible values
+used to describe values that may appear within an array
+* object[] - value definitions
