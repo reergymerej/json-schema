@@ -1,0 +1,27 @@
+{
+  "name": "json-schema",
+  "version": "1.0.0",
+  "description": "**Problem**",
+  "main": "app.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reergymerej/json-schema.git"
+  },
+  "author": "Jeremy Greer <jeremy.greer.atl@gmail.com> (http://jeremygreer.herokuapp.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reergymerej/json-schema/issues"
+  },
+  "homepage": "https://github.com/reergymerej/json-schema",
+  "devDependencies": {
+    "mocha": "^2.0.1",
+    "willy": "^1.0.1"
+  }
+}

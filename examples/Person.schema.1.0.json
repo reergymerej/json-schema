@@ -1,0 +1,29 @@
+{
+  "name": "Person",
+  "version": "1.0",
+  "description": "an object describing a person",
+  "url": "http://github.com/reergymerej",
+
+  "fields": {
+    "gender": {
+      "type": "string",
+      "values": [
+        "male", "female"
+      ]
+    },
+    "age": "number",
+    "first name": "string",
+    "last name": "string",
+    "children": "Person[]",
+    "spouse": {
+      "schema": {
+        "name": "Person",
+        "version": "1.0"
+      }
+    },
+    "height": {
+      "default": 72
+    },
+    "weight": "number"
+  }
+}

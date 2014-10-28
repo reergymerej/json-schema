@@ -99,3 +99,129 @@ used to describe a field's value
 possible values
 used to describe values that may appear within an array
 * object[] - value definitions
+
+
+================================================
+What needs to be documented?
+* meta data about the schema
+* what fields are in schema
+* field values
+* additional schema/field info as needed
+* enumerated values
+* sub-schemas
+
+reserved schema-level properties
+* description
+* fields
+* name
+* version
+
+reserved field-level properties
+* default
+* description
+* fields
+* schema
+* type
+* values
+
+concepts
+* schema info
+* field value info
+* value types
+* sub-schemas
+
+
+fields definition
+* array
+* object
+
+
+fields definition array
+
+```js
+{
+  "fields": ["a", "b", "c"]
+}
+```
+
+fields definition object
+
+names should match the names in the JSON
+
+values should describe the expected values in the JSON
+
+value definitions
+* string
+
+string
+When a value definition is a string, the string describes the data type.
+
+```js
+{
+  "fields": {
+    "a": "number"
+  }
+}
+```
+
+Separate multiple expected types with spaces.
+
+```js
+{
+  "fields": {
+    "a": "number boolean string"
+  }
+}
+```
+
+Indicate value types in array with brackets.
+
+```js
+{
+  "fields": {
+    "a": "number[]"
+  }
+}
+```
+
+object
+Value definition objects allow you to convey more information about the values.  All properties of the value definition are optional.
+
+This is the equivalent of using a fields definition array.
+
+```js
+{
+  "fields": {
+    "a": {}
+  }
+}
+```
+
+value definition properties
+* type
+* description
+
+type
+Use type to describe the value data type.
+
+```js
+{
+  "fields": {
+    "a": {
+      "type": "number"
+    }
+  }
+}
+```
+
+description
+
+```js
+{
+  "fields": {
+    "a": {
+      "description": "This is a human-readable description of what this field represents."
+    }
+  }
+}
+```
