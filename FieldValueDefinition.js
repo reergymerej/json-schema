@@ -3,6 +3,8 @@
 var FieldValueDefinition = function (config) {
   if (typeof config === 'string') {
     this.interpretStringConfig(config);
+  } else {
+    this.interpretObjectConfig(config);
   }
 };
 
@@ -19,9 +21,6 @@ FieldValueDefinition.prototype.VALID_TYPES = {
   "array": true
 };
 
-
-FieldValueDefinition.prototype.name = undefined;
-
 /**
 * possible data types
 * {String[]}
@@ -30,7 +29,7 @@ FieldValueDefinition.prototype.types = undefined;
 
 /**
 * possible values (only relevant for array types)
-* {FieldValueDefinitions[]}
+* {FieldValueDefinition[]}
 */
 FieldValueDefinition.prototype.values = undefined;
 
@@ -50,6 +49,23 @@ FieldValueDefinition.prototype.interpretStringConfig = function (types) {
   } else {
     this.types = this.getValidTypes(types);
   }
+};
+
+/**
+* Sets own properties based on config object.
+* @param {Object} config
+* @param {String} [config.description]
+* @param {String} [config.type]
+* @param {FieldValueDefinition[]} [config.values]
+* @param {Object} [config.fields]
+*/
+FieldValueDefinition.prototype.interpretObjectConfig = function (config) {
+  this.description = config.description;
+  if (typeof config.type === 'string') {
+    this.interpretStringConfig(config.type);
+  }
+  this.values = this.values || config.values;
+  this.fields = config.fields;
 };
 
 /**

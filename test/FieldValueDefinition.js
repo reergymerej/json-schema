@@ -40,8 +40,26 @@ describe('When defined as a string', function () {
       will(definition.types).have('array');
     });
 
-    it('it should indicate a value type for the array', function () {
+    it('should indicate a value type for the array', function () {
       will(definition.values[0].types).have('string');
     });
+  });
+});
+
+describe('When defined as an object', function () {
+  it('should not assume any properties have been defined', function () {
+    var definition = new FieldValueDefinition({});
+    will(definition).not.haveAny(['description', 'types', 'values', 'fields']);
+  });
+
+  it('should pick up known properties', function () {
+    var definition = new FieldValueDefinition({
+      description: 'bar',
+      type: 'boolean',
+      values: [],
+      fields: {}
+    });
+
+    will(definition).have(['description', 'types', 'values', 'fields']);
   });
 });
