@@ -200,6 +200,7 @@ This is the equivalent of using a fields definition array.
 value definition properties
 * type
 * description
+* values
 
 type
 Use type to describe the value data type.
@@ -221,6 +222,22 @@ description
   "fields": {
     "a": {
       "description": "This is a human-readable description of what this field represents."
+    }
+  }
+}
+```
+
+values
+List value definitions for values that may appear in an array.
+
+```js
+{
+  "fields": {
+    "gender": {
+      "type": "array",
+      "values": [
+        "male", "female"
+      ]
     }
   }
 }

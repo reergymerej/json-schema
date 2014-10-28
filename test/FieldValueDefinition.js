@@ -40,8 +40,8 @@ describe('When defined as a string', function () {
       will(definition.types).have('array');
     });
 
-    xit('it should indicate the array\'s value type', function () {
-
+    it('it should indicate a value type for the array', function () {
+      will(definition.values[0].types).have('string');
     });
   });
 });

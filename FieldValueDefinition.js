@@ -2,7 +2,7 @@
 
 var FieldValueDefinition = function (config) {
   if (typeof config === 'string') {
-    this.types = this.getValuesFromTypeString(config);
+    this.interpretStringConfig(config);
   }
 };
 
@@ -20,21 +20,18 @@ FieldValueDefinition.prototype.values = undefined;
 FieldValueDefinition.prototype.fields = undefined;
 
 /**
-* Get an array of valid types.
+* Sets own `types` and `values` if applicable.
 * @param {String} types
-* @return {String[]}
 */
-FieldValueDefinition.prototype.getValuesFromTypeString = function (types) {
-  var parsedTypes;
+FieldValueDefinition.prototype.interpretStringConfig = function (types) {
   var arrayTypeMatches = types.match(/[a-z]+(?=\[\])/i);
 
   if (arrayTypeMatches) {
-    parsedTypes = ['array'];
+    this.types = ['array'];
+    this.values = [new FieldValueDefinition(arrayTypeMatches[0])];
   } else {
-    parsedTypes = this.getValidTypes(types);
+    this.types = this.getValidTypes(types);
   }
-
-  return parsedTypes;
 };
 
 /**
