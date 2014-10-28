@@ -6,17 +6,35 @@ var FieldValueDefinition = function (config) {
   }
 };
 
-FieldValueDefinition.prototype.VALID_TYPES = 
-  'string|number|boolean|boolean|null|object|array'.split('|');
+/**
+* hash of valid types
+* {Object}
+*/
+FieldValueDefinition.prototype.VALID_TYPES = {
+  "string": true,
+  "number": true,
+  "boolean": true,
+  "null": true,
+  "object": true,
+  "array": true
+};
 
 
 FieldValueDefinition.prototype.name = undefined;
 
 /**
-* {String[]} possible data types
+* possible data types
+* {String[]}
 */
 FieldValueDefinition.prototype.types = undefined;
+
+/**
+* possible values (only relevant for array types)
+* {FieldValueDefinitions[]}
+*/
 FieldValueDefinition.prototype.values = undefined;
+
+
 FieldValueDefinition.prototype.fields = undefined;
 
 /**
@@ -43,7 +61,7 @@ FieldValueDefinition.prototype.getValidTypes = function (types) {
   var cleanedTypes = [];
 
   types.split(' ').forEach(function (type) {
-    if (this.VALID_TYPES.indexOf(type) > -1) {
+    if (this.VALID_TYPES[type]) {
       cleanedTypes.push(type);
     }
   }, this);
