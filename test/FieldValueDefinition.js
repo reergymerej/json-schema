@@ -4,7 +4,7 @@ var will = require('willy').will;
 var FieldValueDefinition = require('../FieldValueDefinition.js');
 
 describe('When defined as a string', function () {
-  it('should indicate "types"', function () {
+  it('should indicate types', function () {
     var config = 'boolean';
     var definition = new FieldValueDefinition(config);
 
@@ -26,6 +26,22 @@ describe('When defined as a string', function () {
       var definition = new FieldValueDefinition(config);
 
       will(definition.types).haveOnly(['boolean', 'string']);
+    });
+  });
+
+  describe('with brackets', function () {
+    var definition;
+        
+    before(function () {
+      definition = new FieldValueDefinition('string[]');
+    });
+
+    it('should indicate "array" type', function () {
+      will(definition.types).have('array');
+    });
+
+    xit('it should indicate the array\'s value type', function () {
+
     });
   });
 });
