@@ -67,7 +67,7 @@ FieldValueDefinition.prototype.interpretObjectConfig = function (config) {
   this.values = this.values || config.values;
 
   if (config.fields) {
-    this.fields = this.getFieldsObject(config.fields);
+    this.fields = this.getFieldsFromConfigs(config.fields);
   }
 };
 
@@ -76,7 +76,8 @@ FieldValueDefinition.prototype.interpretObjectConfig = function (config) {
 * @param {Object} fieldsConfig
 * @return {Object}
 */
-FieldValueDefinition.prototype.getFieldsObject = function (fieldsConfig) {
+FieldValueDefinition.prototype.getFieldsFromConfigs = function (fieldsConfig) {
+  // TODO: Reuse the one from JSONSchema.  Handle circular reference.
   var fields = {};
 
   Object.keys(fieldsConfig).forEach(function (fieldName) {
