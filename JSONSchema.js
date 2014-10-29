@@ -34,4 +34,25 @@ JSONSchema.prototype.getFieldsFromConfigs = function (fieldsConfig) {
   return fields;  
 };
 
+/**
+* Pass an object of data into the schema and get back those properties
+* that fit into the schema.
+* @param {Object} data
+* @return {Object}
+*/
+JSONSchema.prototype.filter = function (data) {
+  var result = {};
+
+  Object.keys(data).forEach(function (fieldName) {
+    var schemaField = this.fields[fieldName];
+    var filteredData = schemaField && schemaField.filter(data[fieldName]);
+    
+    if (filteredData) {
+      result[fieldName] = filteredData;
+    }
+  }, this);
+
+  return result;
+};
+
 module.exports = JSONSchema;

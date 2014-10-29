@@ -104,4 +104,41 @@ FieldValueDefinition.prototype.getValidTypes = function (types) {
   return cleanedTypes;
 };
 
+/**
+* Validate a value against this definition.
+* @param value
+* @return will return the value if it is acceptable for this definition
+*/
+FieldValueDefinition.prototype.filter = function (value) {
+  if (!this.types || this.types.indexOf(this.getSchemaTypeIdentifier(value)) > -1) {
+    return value;
+  }
+};
+
+/**
+* Get the corresponding JSONSchema data type for a value.
+* @param
+* @return {String}
+*/
+FieldValueDefinition.prototype.getSchemaTypeIdentifier = function (value) {
+  var type;
+  
+  // convert to JSON and back to simplify type detection
+  value = JSON.parse(JSON.stringify({
+    value: value
+  })).value;
+
+  type = typeof value;
+
+  if (type === 'object') {
+    if (value === null) {
+      type = 'null';
+    } else if (value instanceof Array) {
+      type = 'array';
+    }
+  }
+
+  return type;
+};
+
 module.exports = FieldValueDefinition;
