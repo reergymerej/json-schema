@@ -2,7 +2,7 @@
 
 var FieldValueDefinition = require('./FieldValueDefinition.js');
 
-var JSONSchema = function (config) {
+var JSONSchema = function JSONSchema (config) {
   this.initExpectedProperties(config);
 };
 

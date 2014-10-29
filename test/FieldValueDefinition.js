@@ -136,5 +136,40 @@ describe('FieldValueDefinition', function () {
       var fvd = new FieldValueDefinition('null');
       will(fvd.filter(null)).be(null);
     });
+
+    describe('object value types', function () {
+      var fvd = new FieldValueDefinition({
+        type: 'object',
+        fields: {
+          a: 'string',
+          b: {
+            type: 'object',
+            fields: {
+              c: 'number',
+              d: 'boolean'
+            }
+          }
+        }
+      });
+
+      var value = {
+        a: 'foo',
+        b: {
+          c: 123,
+          d: 456,
+          e: 'asdf'
+        },
+        c: false
+      };
+
+      it('should work recursively on objects', function () {
+        var filtered = fvd.filter(value);
+
+        will(filtered.a).be('foo');
+        will(filtered).not.haveAny('c');
+        will(filtered.b.c).be(123);
+        will(filtered.b).not.haveAny(['d', 'e']);
+      });
+    });
   });
 });

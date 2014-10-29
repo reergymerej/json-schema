@@ -1,6 +1,6 @@
 'use strict';
 
-var FieldValueDefinition = function (config) {
+var FieldValueDefinition = function FieldValueDefinition (config) {
   if (typeof config === 'string') {
     this.interpretStringConfig(config);
   } else {
@@ -110,9 +110,48 @@ FieldValueDefinition.prototype.getValidTypes = function (types) {
 * @return will return the value if it is acceptable for this definition
 */
 FieldValueDefinition.prototype.filter = function (value) {
-  if (!this.types || this.types.indexOf(this.getSchemaTypeIdentifier(value)) > -1) {
-    return value;
+  var typeIdentifier;
+  var filtered;
+  
+  if (!this.types) {
+    filtered = value;
+
+  } else {
+    typeIdentifier = this.getSchemaTypeIdentifier(value);
+    
+    if (this.types.indexOf(typeIdentifier) > -1) {
+      filtered = value;
+      if (typeIdentifier === 'object') {
+        filtered = this.filterObjectFields(filtered);
+      }
+    }
   }
+
+  return filtered;
+};
+
+/**
+* Filter out any object fields that are not in this schema.
+* @param {Object} value
+* @return {Object}
+*/
+FieldValueDefinition.prototype.filterObjectFields = function (value) {
+  var filtered = {};
+
+  Object.keys(value).forEach(function (valueFieldName) {
+    var valueField = value[valueFieldName];
+    var schemaField = this.fields[valueFieldName];
+
+    if (schemaField) {
+      if (this.getSchemaTypeIdentifier(valueField) === 'object') {
+        filtered[valueFieldName] = schemaField.filterObjectFields(valueField);
+      } else {
+        filtered[valueFieldName] = schemaField.filter(valueField);
+      }
+    }
+  }, this);
+
+  return filtered;
 };
 
 /**
