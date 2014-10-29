@@ -62,4 +62,19 @@ describe('When defined as an object', function () {
 
     will(definition).have(['description', 'types', 'values', 'fields']);
   });
+
+  describe('with sub-fields', function () {
+    it('should create FieldValueDefinitions for each sub-field config', function () {
+      var definition = new FieldValueDefinition({
+        fields: {
+          a: 'string',
+          b: 'boolean',
+          c: 'number'
+        }
+      });
+
+      will(definition.fields.a).beA(FieldValueDefinition);
+      will(Object.keys(definition.fields).length).be(3);
+    });
+  });
 });

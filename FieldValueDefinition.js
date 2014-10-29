@@ -65,7 +65,25 @@ FieldValueDefinition.prototype.interpretObjectConfig = function (config) {
     this.interpretStringConfig(config.type);
   }
   this.values = this.values || config.values;
-  this.fields = config.fields;
+
+  if (config.fields) {
+    this.fields = this.getFieldsObject(config.fields);
+  }
+};
+
+/**
+* Get a map of FieldValueDefinitions from a configuration object.
+* @param {Object} fieldsConfig
+* @return {Object}
+*/
+FieldValueDefinition.prototype.getFieldsObject = function (fieldsConfig) {
+  var fields = {};
+
+  Object.keys(fieldsConfig).forEach(function (fieldName) {
+    fields[fieldName] = new FieldValueDefinition(fieldsConfig[fieldName]);
+  });
+
+  return fields;
 };
 
 /**
