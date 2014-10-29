@@ -190,13 +190,35 @@ describe('FieldValueDefinition', function () {
       });
     });
 
-    // describe.only('array values types', function () {
-    //   var fvd = new FieldValueDefinition({
-    //     type: 'array',
-    //     values: [
-    //       {}
-    //     ]
-    //   });
-    // });
+    describe('array values types', function () {
+      it('should return array when all values match possible array values', function () {
+        var fvd = new FieldValueDefinition('number[]');
+        var filtered = fvd.filter([1, 2, 3]);
+
+        will(filtered).have([1, 2, 3]);
+      });
+
+      it('should return array when all values match possible array values (mixed values)', function () {
+        var fvd = new FieldValueDefinition({
+          type: 'array',
+          values: ['number', 'string']
+        });
+
+        var filtered = fvd.filter([1, '2', 3]);
+
+        will(filtered).have([1, '2', 3]);
+      });
+
+      it('should not return array when one of the values doesn\'t match possible values', function () {
+        var fvd = new FieldValueDefinition({
+          type: 'array',
+          values: ['number', 'string']
+        });
+
+        var filtered = fvd.filter([1, '2', 3, false]);
+
+        will(filtered).beUndefined();
+      });
+    });
   });
 });

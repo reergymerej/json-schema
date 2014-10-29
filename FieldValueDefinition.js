@@ -144,11 +144,38 @@ FieldValueDefinition.prototype.filter = function (value) {
       filtered = value;
       if (typeIdentifier === 'object') {
         filtered = this.filterObjectFields(filtered);
+      } else if (typeIdentifier === 'array') {
+
+        if (!this.doArrayValuesFit(value)) {
+          filtered = undefined;
+        }
       }
     }
   }
 
   return filtered;
+};
+
+/**
+* Check all the values in an array to ensure they match the possible values
+* for this FieldValueDefinition.  If ALL match up, returns true.
+* @return {Boolean}
+*/
+FieldValueDefinition.prototype.doArrayValuesFit = function (arr) {
+  var allMatch = true;
+
+  arr.every(function (arrValue) {
+    var matches;
+
+    this.values.every(function (possibleValue) {
+      matches = !!possibleValue.filter(arrValue);
+      return !matches;
+    });
+
+    return (allMatch = matches);
+  }, this);
+
+  return allMatch;
 };
 
 /**
