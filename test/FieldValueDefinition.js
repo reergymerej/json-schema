@@ -78,6 +78,24 @@ describe('FieldValueDefinition', function () {
         will(Object.keys(definition.fields).length).be(3);
       });
     });
+
+    describe('arrays', function () {
+      it('should pick up the acceptable value definitions', function () {
+        var fvd = new FieldValueDefinition({
+          fields: {
+            a: {
+              type: 'array',
+              values: [
+                'string',
+                'boolean'
+              ]
+            }
+          }
+        });
+
+        will(fvd.fields.a.values[0].types).haveOnly('string');
+      });
+    });
   });
 
   describe('determining types', function () {
@@ -171,5 +189,14 @@ describe('FieldValueDefinition', function () {
         will(filtered.b).not.haveAny(['d', 'e']);
       });
     });
+
+    // describe.only('array values types', function () {
+    //   var fvd = new FieldValueDefinition({
+    //     type: 'array',
+    //     values: [
+    //       {}
+    //     ]
+    //   });
+    // });
   });
 });

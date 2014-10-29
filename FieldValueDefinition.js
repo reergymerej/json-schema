@@ -64,11 +64,32 @@ FieldValueDefinition.prototype.interpretObjectConfig = function (config) {
   if (typeof config.type === 'string') {
     this.interpretStringConfig(config.type);
   }
-  this.values = this.values || config.values;
+
+  // values may have already been determined if the config was a string (boolean[] shorthand)
+  if (!this.values && config.values) {
+    this.values = this.getValueDefinitionsFromConfig(config.values);
+  }
 
   if (config.fields) {
     this.fields = this.getFieldsFromConfigs(config.fields);
   }
+};
+
+/**
+* Convert array of values config into FieldValueDefinitions.
+* @param {Object[]/String[]} valuesConfig
+* @return {FieldValueDefinition[]}
+*/
+FieldValueDefinition.prototype.getValueDefinitionsFromConfig = function (valuesConfig) {
+  var definitions = [];
+
+  if (valuesConfig) {
+    valuesConfig.forEach(function (config) {
+      definitions.push(new FieldValueDefinition(config));
+    });
+  }
+
+  return definitions;
 };
 
 /**
