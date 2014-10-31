@@ -47,7 +47,7 @@ JSONSchema.prototype.filter = function (data) {
     var schemaField = this.fields[fieldName];
     var filteredData = schemaField && schemaField.filter(data[fieldName]);
     
-    if (filteredData) {
+    if (filteredData !== undefined) {
       result[fieldName] = filteredData;
     }
   }, this);
